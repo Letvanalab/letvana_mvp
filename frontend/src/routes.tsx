@@ -23,19 +23,19 @@ const routes = [
         Component: AuthLayout,
         children: [
             {
-                path: '/login',
+                path: 'login',
                 element: <Login />,
             },
             {
-                path: '/register',
+                path: 'register',
                 element: <Register />,
             },
             {
-                path: '/password/forgot',
+                path: 'password/forgot',
                 element: <ForgotPassword />,
             },
             {
-                path: '/password/reset?token={token}&email={email}',
+                path: 'password/reset?token={token}&email={email}',
                 element: <ResetPassword />,
             }
         ]

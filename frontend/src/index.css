@@ -39,6 +39,15 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  
+  /* Letvana Homes Color Variables */
+  --color-letvana-primary: #0ea5e9;
+  --color-letvana-secondary: #64748b;
+  --color-letvana-accent: #fbbf24;
+  --color-letvana-dark: #0f172a;
+  --color-letvana-light: #f8fafc;
+  --color-letvana-white: #ffffff;
+  --color-letvana-overlay: rgba(0, 0, 0, 0.5);
 }
 
 :root {
@@ -116,5 +125,60 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Letvana Homes Custom Styles */
+@layer components {
+  .letvana-gradient {
+    background: linear-gradient(135deg, var(--color-letvana-primary) 0%, var(--color-letvana-secondary) 100%);
+  }
+  
+  .letvana-shadow {
+    box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.1), 0 4px 6px -4px rgba(14, 165, 233, 0.1);
+  }
+  
+  .letvana-card {
+    @apply bg-white rounded-xl shadow-lg border border-gray-100;
+  }
+  
+  .letvana-button-primary {
+    @apply bg-letvana-primary hover:bg-letvana-primary/90 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200;
+  }
+  
+  .letvana-button-secondary {
+    @apply bg-white hover:bg-gray-50 text-letvana-primary border border-letvana-primary font-semibold px-6 py-3 rounded-lg transition-all duration-200;
+  }
+  
+  /* Hide scrollbar for webkit browsers */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
+  }
+  
+  /* Line clamp utilities */
+  .line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+  
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
   }
 }

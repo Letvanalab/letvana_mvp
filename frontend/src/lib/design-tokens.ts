@@ -2,35 +2,34 @@
  * Design Tokens - Single source of truth for design system values
  * 
  * This file contains all the design tokens extracted from Figma.
- * Update these values when the design changes, and they'll automatically
- * propagate throughout your application.
+ * Updated with Letvana Homes brand colors and design system.
  */
 
-// Color Palette - Extract these from your Figma design
+// Color Palette - Extracted from Letvana Homes Figma design
 export const colors = {
-    // Primary Brand Colors
+    // Primary Brand Colors (Letvana Blue/Teal)
     primary: {
-        50: '#eff6ff',   // Lightest
-        100: '#dbeafe',
-        200: '#bfdbfe',
-        300: '#93c5fd',
-        400: '#60a5fa',
-        500: '#3b82f6',  // Main brand color
-        600: '#2563eb',
-        700: '#1d4ed8',
-        800: '#1e40af',
-        900: '#1e3a8a',  // Darkest
-        950: '#172554',
+        50: '#f0f9ff',   // Very light blue
+        100: '#e0f2fe',  // Light blue
+        200: '#bae6fd',  // Light blue border
+        300: '#7dd3fc',  // Light blue accent
+        400: '#38bdf8',  // Medium blue
+        500: '#0ea5e9',  // Main brand color (Letvana blue)
+        600: '#0284c7',  // Hover state
+        700: '#0369a1',  // Active state
+        800: '#075985',  // Focus state
+        900: '#0c4a6e',  // Dark text
+        950: '#082f49',  // Darkest text
     },
 
-    // Secondary/Accent Colors
+    // Secondary Colors (Supporting palette)
     secondary: {
         50: '#f8fafc',
         100: '#f1f5f9',
         200: '#e2e8f0',
         300: '#cbd5e1',
         400: '#94a3b8',
-        500: '#64748b',  // Main secondary color
+        500: '#64748b',  // Secondary text
         600: '#475569',
         700: '#334155',
         800: '#1e293b',
@@ -45,7 +44,7 @@ export const colors = {
         200: '#bbf7d0',
         300: '#86efac',
         400: '#4ade80',
-        500: '#22c55e',  // Main success color
+        500: '#22c55e',  // Success green
         600: '#16a34a',
         700: '#15803d',
         800: '#166534',
@@ -60,7 +59,7 @@ export const colors = {
         200: '#fde68a',
         300: '#fcd34d',
         400: '#fbbf24',
-        500: '#f59e0b',  // Main warning color
+        500: '#f59e0b',  // Warning orange
         600: '#d97706',
         700: '#b45309',
         800: '#92400e',
@@ -75,7 +74,7 @@ export const colors = {
         200: '#fecaca',
         300: '#fca5a5',
         400: '#f87171',
-        500: '#ef4444',  // Main error color
+        500: '#ef4444',  // Error red
         600: '#dc2626',
         700: '#b91c1c',
         800: '#991b1b',
@@ -83,7 +82,7 @@ export const colors = {
         950: '#450a0a',
     },
 
-    // Neutral Colors
+    // Neutral Colors (Text, borders, backgrounds)
     neutral: {
         50: '#fafafa',
         100: '#f5f5f5',
@@ -98,11 +97,23 @@ export const colors = {
         950: '#0a0a0a',
     },
 
+    // Letvana Specific Colors
+    letvana: {
+        primary: '#0ea5e9',      // Main brand blue
+        secondary: '#64748b',    // Secondary text
+        accent: '#fbbf24',       // Gold for ratings
+        dark: '#0f172a',         // Dark backgrounds
+        light: '#f8fafc',        // Light backgrounds
+        white: '#ffffff',        // Pure white
+        overlay: 'rgba(0, 0, 0, 0.5)', // Semi-transparent overlay
+    },
+
     // Semantic Colors (for specific use cases)
     semantic: {
         info: '#0ea5e9',      // Blue for information
-        link: '#3b82f6',      // Blue for links
-        highlight: '#fbbf24', // Yellow for highlighting
+        link: '#0ea5e9',      // Blue for links
+        highlight: '#fbbf24', // Gold for highlighting
+        rating: '#fbbf24',    // Gold for star ratings
     },
 } as const
 
