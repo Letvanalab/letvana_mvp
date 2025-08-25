@@ -8,15 +8,11 @@ import { FAQSection } from '../components/FAQSection'
 import { Footer } from '../components/Footer'
 
 const Landing = () => {
-  const handleSearchClick = () => {
-    // Scroll to search form or open search modal
-    console.log('Search clicked')
-  }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen w-screen p-4 overflow-x-hidden">
       {/* Header */}
-      <Header onSearchClick={handleSearchClick} />
+      {/* <Header onSearchClick={handleSearchClick} /> */}
       
       {/* Hero Section */}
       <HeroSection />

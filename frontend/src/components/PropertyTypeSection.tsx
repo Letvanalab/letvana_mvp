@@ -13,6 +13,9 @@ import {
  import { 
   PiBuildingOffice as Office 
 } from "react-icons/pi";
+import { Icons } from '../lib/icons';
+
+const icons = Icons();
 
 interface PropertyTypeIcon {
   id: string
@@ -22,16 +25,13 @@ interface PropertyTypeIcon {
 
 export const PropertyTypeSection: React.FC = () => {
   const propertyTypes: PropertyTypeIcon[] = [
-    { id: 'apartment', name: 'Apartment', icon: Home },
-    { id: 'office', name: 'Office', icon: Building2 },
-    { id: 'duplex', name: 'Duplex', icon: Castle },
-    { id: 'bungalow', name: 'Bungalow', icon: House },
-    { id: 'commercial', name: 'Commercial', icon: Store },
-    { id: 'villa', name: 'Villa', icon: Hotel },
-    { id: 'warehouse', name: 'Warehouse', icon: Warehouse },
-    { id: 'factory', name: 'Factory', icon: Factory },
-    { id: 'building', name: 'Building', icon: Building },
-    { id: 'office-space', name: 'Office Space', icon: Office },
+    { id: 'apartment', name: 'Apartment', icon: icons.apartment },
+    { id: 'office', name: 'Office', icon: icons.office },
+    { id: 'duplex', name: 'Duplex', icon: icons.duplex },
+    { id: 'bungalow', name: 'Bungalow', icon: icons.bungalow },
+    { id: 'commercial', name: 'Commercial', icon: icons.commercial },
+    { id: 'villa', name: 'Villa', icon: icons.villa },
+    { id: 'office-space', name: 'Office Space', icon: icons.office2 },
   ]
 
   return (

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { MapPin, Home, DollarSign, Bed } from 'lucide-react'
+import { Header } from './Header'
 
 interface PropertyType {
   id: string
@@ -23,6 +24,11 @@ export const HeroSection: React.FC = () => {
     rooms: '',
   })
 
+  const handleSearchClick = () => {
+    // Scroll to search form or open search modal
+    console.log('Search clicked')
+  }
+
   const togglePropertyType = (id: string) => {
     setPropertyTypes(prev => 
       prev.map(type => 
@@ -37,19 +43,20 @@ export const HeroSection: React.FC = () => {
   }
 
   return (
-    <section className="relative min-h-screen flex items-center">
+    <section className="relative min-h-screen flex items-center w-[98vw] overflow-x-hidden m-x-auto">
+       <Header />
       {/* Background Image */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat w-full rounded-lg"
         style={{
-          backgroundImage: 'url("https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80")',
+          backgroundImage: 'url("./landing-page.jpg")',
         }}
       >
         <div className="absolute inset-0 bg-black/40"></div>
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-2 w-full">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div className="text-white">
