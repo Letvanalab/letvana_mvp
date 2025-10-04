@@ -1,4 +1,3 @@
-const { auth } = require('express-openid-connect')
 const prisma = require('../../database/prisma')
 
 
@@ -23,7 +22,7 @@ const syncUserProfile=async(authOUser)=>{
     }
     const user = await prisma.users.create({
         data:{
-            user_id:sub,
+            // user_id:sub,
             email:email,
             first_name:given_name,
             last_name: family_name,
@@ -62,7 +61,7 @@ const getProfile =async (authOUser)=>{
 
     return {
         success: true,
-        user
+        data:user
     };
 
 };

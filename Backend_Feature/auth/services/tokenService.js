@@ -9,6 +9,8 @@ const generateAccessToken = (id) =>{
     return jwt.sign({id: safeId}, JWT , {expiresIn:'1h' }
     )
 }
+
+
 // Function to set token in HTTP-only cookie
 const setTokenCookie=(res, token)=>{
  res.cookie("token", token, {

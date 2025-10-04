@@ -1,7 +1,10 @@
 const {auth}= require('express-openid-connect')
-const authConfig = require('../config/authConfig')
+const {config} = require('../config/authConfig')
+const dotenv=require('dotenv')
 
-const authOMiddleware = auth(authConfig)
+dotenv.config();
+
+const authOMiddleware = auth(config)
 
 const requireAuth0 = (req, res, next) => {
     if (!req.oidc.isAuthenticated()) {

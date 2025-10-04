@@ -9,4 +9,5 @@ const config={
   issuerBaseURL: process.env.AUTH_ISSUER_BASE_URL
 }
 
-module.exports=config
+
+module.exports={config}

@@ -3,3 +3,4 @@
 /formals
 /prisma
 /generated
+/auth/services/passwordReset.Service.js
