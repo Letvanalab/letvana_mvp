@@ -1,4 +1,5 @@
 const jwt =require('jsonwebtoken');
+const crypto = require('crypto')
 
 // Function to generate JWT token
 const generateAccessToken = (id) =>{
@@ -10,6 +11,12 @@ const generateAccessToken = (id) =>{
     )
 }
 
+const generateResetToken= ()=>{
+    return crypto.randomBytes(32).toString('hex')
+};
+
+
+
 
 // Function to set token in HTTP-only cookie
 const setTokenCookie=(res, token)=>{
@@ -20,7 +27,9 @@ const setTokenCookie=(res, token)=>{
     });
 }
 
+
 module.exports ={
     generateAccessToken,
+    generateResetToken,
     setTokenCookie
 }

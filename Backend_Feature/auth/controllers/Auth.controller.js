@@ -1,5 +1,5 @@
 // const {PrismaClient}= require('@prisma/client')
-const authService= require('../services/authService')
+const authService= require('../services/auth.Service')
 
 const CreateAdminController = async(req, res)=>{
     try{

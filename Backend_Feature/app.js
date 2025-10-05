@@ -2,8 +2,9 @@
 const express= require('express')
 const http = require ('http')
 const dotenv= require('dotenv')
-const adminAuthRoutes = require('./auth/routes/authRoutes')
-const authORoutes = require('./auth/routes/authORoutes')
+const adminAuthRoutes = require('./auth/routes/authAdmin.Routes')
+const authORoutes = require('./auth/routes/authO.Routes')
+const userAuthRoutes= require('./auth/routes/authUser.Routes')
 // const { config } = require('./auth/config/authConfig')
 // const authOController=require('./auth/controllers/authO.controller')
 // const {HandleCallbackController}=require('./auth/controllers/authO.controller')
@@ -22,8 +23,9 @@ app.use(express.urlencoded({extended:true}));
 // // app.get('/callback',authOController.HandleCallbackController)
 // app.get('/callback', HandleCallbackController)
 
-app.use('/api/v1/user', adminAuthRoutes)
+app.use('/api/v1/admin', adminAuthRoutes)
 app.use('/api/v1/auth', authORoutes)
+app.use('/api/v1/user', userAuthRoutes)
 
 
 // app.get('/callback', (req, res)=>{
