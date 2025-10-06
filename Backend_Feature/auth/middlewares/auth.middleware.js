@@ -1,6 +1,7 @@
 const bcrypt= require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const rateLimiter=require('express-rate-limit');
+const joi =require('joi')
 
 //Authentication middleware
 const Authenticateuser =async (req, res, next)  =>{
@@ -18,20 +19,37 @@ const Authenticateuser =async (req, res, next)  =>{
     }           
 }
 
+
 //Rate limiter middleware
-const limiter= rateLimiter({
-    windowsMs: 20 * 60 * 1000, // 20 minutes
+const generalLimiter= rateLimiter({
+    windowMs: 20 * 60 * 1000, // 20 minutes
     limit: 100, // limit each IP to 100 requests per windowMs
     message: {error: 'Too many requests, please try again later.'},
-    status: 429 ,
-    ipv6Subnet: 56 , 
-    // skip :(req , res) =>false
+    statusCode: 429 ,
+    standardHeaders :true
 })
 
+const authLimiter= rateLimiter({
+    windowMs : 15*60*1000, //15mins
+    limit: 5,
+    statusCode: 429,
+    message:{error: 'Too many request, please try again'},
+    standardHeaders :true
+})
 
+const resetLimiter =  rateLimiter({
+    windowMs : 30*60*1000,
+    limit: 2,
+    statusCode: 429,
+    message :{error : 'Too many request , please try again'},
+      standardHeaders :true
+})
 
 
 module.exports ={
     Authenticateuser,
-    limiter
+    PasswordValidator,
+    generalLimiter,
+    authLimiter,
+    resetLimiter,
 }

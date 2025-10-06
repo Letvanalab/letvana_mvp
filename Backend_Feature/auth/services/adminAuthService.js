@@ -147,11 +147,6 @@ const getAdminById = async(userId)=>{
 
 
 
-
-
-
-
-
 module.exports={
     CreateAdmin,
     LoginAdmin,

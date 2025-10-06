@@ -1,5 +1,5 @@
 // const {PrismaClient}= require('@prisma/client')
-const authService= require('../services/auth.Service')
+const authService= require('../services/adminAuthService')
 
 const CreateAdminController = async(req, res)=>{
     try{
@@ -30,6 +30,9 @@ const LoginAdminController = async(req, res)=>{
         return res.status(500).json({status:500, success:false, message:"internal server error"})
     }
 }
+
+
+
 
 module.exports={
     CreateAdminController,
