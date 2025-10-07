@@ -25,7 +25,7 @@ const createUser =async({
         where : {email}
     })
     if(existingUser){
-        return {status:409 , success: false, message: "Admin already Exists"}
+        return {status:409 , success: false, message: "user already Exists"}
     }
 
         const password_hash = await bcrypt.hash(password, 10)

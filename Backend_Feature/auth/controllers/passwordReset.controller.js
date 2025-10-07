@@ -36,7 +36,7 @@ const passwordResetController =async(req, res)=>{
         if(!token || !newPassword){
             return res.status(400).json({
                 success:false,
-                message:"Token and new passoword required"
+                message:"Token and new password required"
             })
         }
 

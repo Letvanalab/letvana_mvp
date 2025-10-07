@@ -1,23 +1,7 @@
 const userService = require('../services/userAuthService')
 
 const CreateUserController = async (req, res )=>{
-    try{
-        // const {
-        //     first_name,
-        //     last_name,
-        //     email,
-        //     password,
-        //     phone_number,
-        //     user_type
-        //   } = req.body
-          
-        //   if(!user_type || !email || !phone_number || !first_name || !last_name ){
-        //     return res.status(400).json({
-        //         success: false,
-        //         message: "Input the right credentials "
-        //     })
-        //   }
-          
+    try{          
           const newUser = await userService.createUser(req.body)
           
           if(!newUser.success){
@@ -32,15 +16,7 @@ const CreateUserController = async (req, res )=>{
 
 const LoginUserController = async(req, res)=>{
    try{
-    const {email, password}=req.body 
-
-    if(!email || !password){
-      return res.staus(400).json({
-        success:false,
-        message: "input email and password "
-      })
-    }
-    const existingUser = await userService.loginUser(email, password)
+    const existingUser = await userService.loginUser(req.body)
 
     if(!existingUser){
       return res.status(existingUser.status).json(existingUser)

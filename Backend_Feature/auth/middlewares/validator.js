@@ -1,5 +1,5 @@
 const joi= require('joi')
-const { Schema } = require('mongoose')
+
 
 //password schema
 const passwordSchema = joi.object({
