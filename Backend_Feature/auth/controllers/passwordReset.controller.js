@@ -15,7 +15,7 @@ const UserResetController= async(req, res)=>{
         if(result.success && result.token){
             const resetLink = `${result.token}`;
 
-            console.log(resetLink)
+            // console.log(resetLink)
         }
 
         return res.status(200).json({

@@ -36,7 +36,7 @@ const LandlordDashboard =async(userId , monthsAgo )=>{
             },
         }
         })
-         const total = total._sum.amount || 0
+         const total = revenue._sum.amount || 0
 
 
         const propertySummary = await prisma.rental_agreements.findMany({
@@ -60,8 +60,8 @@ const LandlordDashboard =async(userId , monthsAgo )=>{
             success:true,
             data: {
                 landlord:landlord.first_name,
-                revenue: total,
-                propertySummary: propertySummary.slice(0, 3 )
+                revenue:total,
+                propertySummary: propertySummary
             }
         }
     }catch (error) {

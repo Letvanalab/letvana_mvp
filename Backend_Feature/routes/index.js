@@ -4,7 +4,9 @@ const router=  express.Router();
 const adminAuthRoutes = require('../auth/routes/adminAuth.Routes')
 const userAuthRoutes= require('../auth/routes/userAuth.Routes')
 const dashboardRoutes =require('../dashboard/routes/dashboard.routes')
+const userRoutes = require('../user/routes/userProfile.routes')
 
+router.use('/profile', userRoutes)
 router.use('/admin', adminAuthRoutes)
 router.use('/user', userAuthRoutes)
 router.use('/dashboard', dashboardRoutes)

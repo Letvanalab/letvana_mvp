@@ -1,4 +1,5 @@
 const joi= require('joi')
+const { messages } = require('../../database/prisma')
 
 
 //password schema
@@ -68,6 +69,36 @@ const loginSchema = joi.object({
     password: passwordSchema
 })
 
+const profileSchema =joi.object({
+    first_name :joi.string()
+    .optional()
+    .min(3)
+    .max(100)
+    .messages({
+        'string.min' : 'first name should be at least 3 characters',
+         'string.max' : 'first name should not be more than 100 characters',
+    }),
+
+    last_name: joi.string()
+    .optional()
+    .min(3)
+    .max(100)
+    .messages({
+        'string.min' : 'last name should be at least 3 characters',
+         'string.max' : 'last name should not be more than 100 characters',
+    }),
+
+    phone_number:joi.string()
+    .pattern('/^(?:\+234|0)[789][01]\d{8}$/')
+    .optional()
+    .messages({
+        'string.pattern.base' : ' please input a valid phone number'
+    }),
+
+    profile_picture_url: joi.string()
+    .optional()
+})
+
 //validator factory
 const validate =(schema) =>{
     return (res, req, next)=>{
@@ -91,5 +122,6 @@ module.exports= {
     passwordSchema,
     registerSchema,
     loginSchema,
+    profileSchema,
     validate
 }

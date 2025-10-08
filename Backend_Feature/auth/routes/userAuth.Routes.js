@@ -1,13 +1,13 @@
 const express= require('express')
 const router= express.Router();
 
-const {authLimiter, resetLimiter}= require('../middlewares/auth.middleware')
+const {authLimiter, resetLimiter,Authenticateuser}= require('../middlewares/auth.middleware')
 const ResetController =require('../controllers/passwordReset.controller')
 const UserAuthController = require('../controllers/userAuth.controller')
 const {validate, passwordSchema, registerSchema, loginSchema,} = require('../middlewares/validator')
 
 
-router.use(authLimiter, resetLimiter, )
+router.use(authLimiter, resetLimiter,Authenticateuser )
 
 router.post('/register',validate(passwordSchema),validate(registerSchema),UserAuthController.CreateUserController )
 router.post('/login', validate(loginSchema),UserAuthController.LoginUserController)
