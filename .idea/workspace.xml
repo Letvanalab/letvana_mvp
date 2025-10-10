@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a04e145e-f61b-4bfc-8ce8-71adb667a839" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,11 +33,12 @@
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "frontend-david",
     "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "/home/syntax001/Documents/projects/letvana_mvp/frontend/public/assets",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "Errors",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "to.speed.mode.migration.done": "true",
     "ts.external.directory.path": "/home/syntax001/Documents/projects/letvana_mvp/frontend/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
@@ -60,7 +61,7 @@
       <workItem from="1760133615358" duration="1672000" />
       <workItem from="1760135656988" duration="229000" />
       <workItem from="1760135899352" duration="170000" />
-      <workItem from="1760136091379" duration="748000" />
+      <workItem from="1760136091379" duration="1058000" />
     </task>
     <servers />
   </component>
