@@ -1,0 +1,45 @@
+
+[
+  {
+    "id": 1,
+    "title": "Apartment",
+    "subtext": "212 property",
+    "image": "/assets/vectors/apartments.png"
+  },
+  {
+    "id": 2,
+    "title": "Office",
+    "subtext": "212 property",
+    "image": "/assets/vectors/office.png"
+  },
+  {
+    "id": 3,
+    "title": "Duplex",
+    "subtext": "24 property",
+    "image": "/assets/vectors/duplex.png"
+  },
+  {
+    "id": 4,
+    "title": "Bungalow",
+    "subtext": "212 property",
+    "image": "/assets/vectors/bungalow.png"
+  },
+  {
+    "id": 5,
+    "title": "Commercial",
+    "subtext": "212 property",
+    "image": "/assets/vectors/commercial.png"
+  },
+  {
+    "id": 6,
+    "title": "Villa",
+    "subtext": "212 property",
+    "image": "/assets/vectors/villa.png"
+  },
+  {
+    "id": 7,
+    "title": "Office",
+    "subtext": "212 property",
+    "image": "/assets/vectors/offices.png"
+  }
+]
