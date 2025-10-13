@@ -6,12 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a04e145e-f61b-4bfc-8ce8-71adb667a839" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/components/searchcard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/searchcard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/components/shared/navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/shared/navbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/data/propertyTypes.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/data/propertyTypes.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/auth/register/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/auth/register/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +76,9 @@
       <workItem from="1760135899352" duration="170000" />
       <workItem from="1760136091379" duration="7129000" />
       <workItem from="1760283950401" duration="7472000" />
-      <workItem from="1760347629723" duration="5874000" />
+      <workItem from="1760347629723" duration="7332000" />
+      <workItem from="1760360754139" duration="3521000" />
+      <workItem from="1760371859805" duration="1915000" />
     </task>
     <servers />
   </component>
