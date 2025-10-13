@@ -4,6 +4,11 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+
+import { authAPI } from "@/lib/api/auth";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+
 import Link from "next/link";
 import Image from "next/image";
 import { Eye, EyeOff } from "lucide-react";
@@ -19,20 +24,36 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 
-// Zod validation schema
+// Zod validation schema - Updated to match backend requirements
 const registerSchema = z
   .object({
-    firstName: z.string().min(1, "First name is required"),
-    lastName: z.string().min(1, "Last name is required"),
+    firstName: z
+      .string()
+      .min(3, "First name should be at least 3 characters")
+      .max(15, "First name should not exceed 15 characters"),
+    lastName: z
+      .string()
+      .min(3, "Last name should be at least 3 characters")
+      .max(15, "Last name should not exceed 15 characters"),
     email: z
       .string()
       .min(1, "Email is required")
       .email("Please enter a valid email address"),
-    phoneNumber: z.string().optional(),
+    phoneNumber: z
+      .string()
+      .regex(
+        /^(?:\+234|0)[789][01]\d{8}$/,
+        "Please input a valid Nigerian phone number",
+      )
+      .optional()
+      .or(z.literal("")),
     password: z
       .string()
-      .min(1, "Password is required")
-      .min(8, "Password must be at least 8 characters"),
+      .min(12, "Password must be at least 12 characters")
+      .regex(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{12,}$/,
+        "Password must contain uppercase, lowercase, number and special character",
+      ),
     confirmPassword: z.string().min(1, "Please confirm your password"),
     rememberMe: z.boolean(),
   })
@@ -46,6 +67,7 @@ type RegisterFormValues = z.infer<typeof registerSchema>;
 type AccountType = "tenant" | "landlord" | null;
 
 export default function RegisterPage() {
+  const router = useRouter();
   const [accountType, setAccountType] = useState<AccountType>(null);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -65,15 +87,53 @@ export default function RegisterPage() {
   });
 
   const onSubmit = async (data: RegisterFormValues) => {
+    if (!accountType) {
+      toast.error("Please select an account type");
+      return;
+    }
+
     setIsLoading(true);
     try {
-      console.log("Register data:", {
-        ...data,
-        accountType,
+      const response = await authAPI.register({
+        first_name: data.firstName,
+        last_name: data.lastName,
+        email: data.email,
+        password: data.password,
+        phone_number: data.phoneNumber || undefined,
+        user_type: accountType,
       });
-      // Add your registration logic here
+
+      if (response.success) {
+        // Store token in localStorage or cookie
+        if (response.token) {
+          localStorage.setItem("authToken", response.token);
+        }
+
+        toast.success(response.message || "Account created successfully!");
+
+        // Redirect to dashboard or login
+        router.push("/dashboard");
+      } else {
+        // Handle validation errors
+        if (response.errors && response.errors.length > 0) {
+          response.errors.forEach((error) => toast.error(error));
+        } else {
+          toast.error(response.message || "Registration failed");
+        }
+      }
     } catch (error) {
       console.error("Registration error:", error);
+      if (error instanceof Error) {
+        if (error.message.includes("Backend might not be running")) {
+          toast.error(
+            "Cannot connect to server. Please ensure the backend is running.",
+          );
+        } else {
+          toast.error(error.message);
+        }
+      } else {
+        toast.error("An error occurred. Please try again.");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -456,7 +516,7 @@ export default function RegisterPage() {
                   className="w-full h-12 bg-teal-400 hover:bg-teal-500 text-gray-900 font-semibold rounded-lg"
                   disabled={isLoading}
                 >
-                  {isLoading ? "Creating account..." : "Login"}
+                  {isLoading ? "Creating account..." : "Create account"}
                 </Button>
               </form>
             </Form>

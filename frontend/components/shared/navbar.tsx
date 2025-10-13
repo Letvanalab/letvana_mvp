@@ -72,7 +72,7 @@ export default function Navbar() {
               <Bell className="w-6 h-6 text-black" />
             </button>
             <Link
-              href="/auth/login/page"
+              href="/auth/login"
               className="flex items-center gap-2 p-2 px-4 bg-main hover:bg-main-hover rounded-full cursor-pointer transition-colors"
               aria-label="User Account"
             >
@@ -147,13 +147,14 @@ export default function Navbar() {
               >
                 <Bell className="w-6 h-6 text-black" />
               </button>
-              <button
+              <Link
+                href="/auth/login"
                 className="flex items-center gap-2 p-2 px-4 bg-main hover:bg-main-hover rounded-full cursor-pointer transition-colors"
                 aria-label="User Account"
               >
                 <User className="w-6 h-6 text-black cursor-pointer border border-black rounded-full" />
                 <span>Register/Login</span>
-              </button>
+              </Link>
             </div>
           </div>
         )}
