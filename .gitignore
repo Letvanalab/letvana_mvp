@@ -1,0 +1,10 @@
+# Node
+node_modules/
+.env
+dist/
+coverage/
+
+# Prisma
+prisma/generated/
+prisma/migrations/
+*generated
