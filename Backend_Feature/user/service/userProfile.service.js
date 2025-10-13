@@ -2,7 +2,7 @@ const prisma = require("../../database/prisma");
 
 const getUserProfile = async (userId) => {
   try {
-        const user_id= BigInt(userId)
+    const user_id = BigInt(userId);
     const profile = await prisma.users.findUnique({
       where: { user_id: user_id },
       select: {
@@ -29,11 +29,11 @@ const getUserProfile = async (userId) => {
 
 const updateProfile = async (userId, updatedData) => {
   try {
-
-    const user_id= BigInt(userId)
+    const user_id = BigInt(userId);
     const profile = await prisma.users.update({
       where: {
-        user_id: user_id },
+        user_id: user_id,
+      },
       data: { updatedData },
     });
 
@@ -54,18 +54,16 @@ module.exports = {
   updateProfile,
 };
 
-
-
 // // FOR OF
 // const getLoopers= async (id , loopersee) =>{
-    
+
 // const allowedLoop = ['looper', 'loopee']
 // const filteredLoop ={}
 
 // for (const loops of allowedLoop){
 //     if(loopersee !== undefined){
 //         filteredLoop[loops] = loopersee[loops]
-//     } 
+//     }
 // }
 
 // return{
