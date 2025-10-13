@@ -1,7 +1,5 @@
-const bcrypt= require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const rateLimiter=require('express-rate-limit');
-const joi =require('joi')
 
 //Authentication middleware
 const Authenticateuser =async (req, res, next)  =>{
@@ -30,7 +28,7 @@ const generalLimiter= rateLimiter({
 })
 
 const authLimiter= rateLimiter({
-    windowMs : 15*60*1000, //15mins
+    windowMs : 15*60*1000, //15mins 
     limit: 5,
     statusCode: 429,
     message:{error: 'Too many request, please try again'},
@@ -48,7 +46,6 @@ const resetLimiter =  rateLimiter({
 
 module.exports ={
     Authenticateuser,
-    PasswordValidator,
     generalLimiter,
     authLimiter,
     resetLimiter,

@@ -3,4 +3,6 @@
 /formals
 /prisma
 /generated
+.env.tests
+
 

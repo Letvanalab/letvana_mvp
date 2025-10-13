@@ -23,7 +23,7 @@ const LandlordDashboardController = async (req, res)=>{
             data: dashboard.data
         })
     } catch (error) {
-        console.error('Error in GetLandlordDashboard:', error);
+        console.error('Error in GetLandlordDashboardCont:', error);
         return res.status(500).json({
             success: false,
             error: 'Internal server error'

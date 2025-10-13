@@ -10,9 +10,10 @@ const createUser =async({
     password,
     phone_number,
     user_type,
+    profile_picture_url
 })=>{
     try{
-        const validTypes = user_type_enum
+        const validTypes =Object.values( user_type_enum)
         if(!validTypes.includes(user_type)){
             return{
                 status: 400,
@@ -37,10 +38,14 @@ const createUser =async({
                 first_name,
                 last_name,
                 phone_number,
-                user_type
+                user_type,
+                profile_picture_url
             }
         })
-
+        await prisma.users.update({
+            where: {user_id:newUser.user_id},
+            data:{is_active:true}
+        })
         const token =tokenService.generateAccessToken(newUser.user_id)
 
         return{
@@ -54,7 +59,8 @@ const createUser =async({
                 last_name: newUser.last_name,
                 phone_number: newUser.phone_number,
                 user_type : newUser.user_type,
-                created_at: newUser.created_at
+                created_at: newUser.created_at,
+                profile_picture_url: newUser.profile_picture_url
             }
         }
     }catch(error){

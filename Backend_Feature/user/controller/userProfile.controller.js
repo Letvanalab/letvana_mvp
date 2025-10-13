@@ -1,5 +1,6 @@
 const profileService =  require('../service/userProfile.service')
 
+
 const UserProfileController= async(req, res )=>{
     try{
         const userId= req.user.id

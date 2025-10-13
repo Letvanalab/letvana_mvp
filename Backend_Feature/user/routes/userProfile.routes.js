@@ -8,6 +8,6 @@ const {validate, passwordSchema}= require('../../auth/middlewares/validator')
 router.use(Authenticateuser)
 
 router.get('/get-profile',UserProfileController.UserProfileController)
-router.update('/update-profile',validate(passwordSchema), UserProfileController.UpdateProfileController)
+router.put('/update-profile',validate(passwordSchema), UserProfileController.UpdateProfileController)
 
 module.exports =router

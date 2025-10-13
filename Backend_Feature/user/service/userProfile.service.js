@@ -2,8 +2,9 @@ const prisma = require("../../database/prisma");
 
 const getUserProfile = async (userId) => {
   try {
+        const user_id= BigInt(userId)
     const profile = await prisma.users.findUnique({
-      where: { user_id: BigInt(userId) },
+      where: { user_id: user_id },
       select: {
         user_id: true,
         profile_picture_url: true,
@@ -28,16 +29,11 @@ const getUserProfile = async (userId) => {
 
 const updateProfile = async (userId, updatedData) => {
   try {
-    // const allowedFields = ['first_name', 'last_name', 'phone_number', 'profile_picture_url']
-    // const filteredData ={}
 
-    // for (const field of allowedFields){
-    //     filteredData[field] = updatedData[field]
-    // }
-
+    const user_id= BigInt(userId)
     const profile = await prisma.users.update({
       where: {
-        user_id: BigInt(userId), },
+        user_id: user_id },
       data: { updatedData },
     });
 
@@ -57,6 +53,7 @@ module.exports = {
   getUserProfile,
   updateProfile,
 };
+
 
 
 // // FOR OF
