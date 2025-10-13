@@ -78,7 +78,7 @@ export default function SearchCard() {
                 {/* Search Button */}
                 <button
                     type="submit"
-                    className="w-full bg-main hover:bg-[#6BC4B1] text-gray-900 font-semibold py-4 rounded-lg transition-colors shadow-md cursor-pointer"
+                    className="w-full bg-main hover:bg-main-hover text-gray-900 font-semibold py-4 rounded-lg transition-colors shadow-md cursor-pointer"
                 >
                     Search Property
                 </button>

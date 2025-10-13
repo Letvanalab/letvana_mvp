@@ -10,7 +10,7 @@
     "id": 2,
     "title": "Office",
     "subtext": "212 property",
-    "image": "/assets/vectors/office.png"
+    "image": "/assets/vectors/offices.png"
   },
   {
     "id": 3,
@@ -40,6 +40,6 @@
     "id": 7,
     "title": "Office",
     "subtext": "212 property",
-    "image": "/assets/vectors/offices.png"
+    "image": "/assets/vectors/office.png"
   }
 ]

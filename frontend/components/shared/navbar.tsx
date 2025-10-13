@@ -10,7 +10,7 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="z-20 w-full bg-dark  py-4">
+    <nav className="z-30 w-full bg-dark  py-4">
       <Container>
         <div className="flex items-center justify-between space-x-6 mx-auto">
           {/* Logo */}
@@ -71,24 +71,26 @@ export default function Navbar() {
             >
               <Bell className="w-6 h-6 text-black" />
             </button>
-            <button
-              className="p-2 hover:bg-black/10 rounded-full transition-colors"
+            <Link
+              href="/auth/login/page"
+              className="flex items-center gap-2 p-2 px-4 bg-main hover:bg-main-hover rounded-full cursor-pointer transition-colors"
               aria-label="User Account"
             >
-              <User className="w-6 h-6 text-black" />
-            </button>
+              <User className="w-6 h-6 text-black cursor-pointer border border-black rounded-full" />
+              <span>Register/Login</span>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 hover:bg-black/10 rounded-lg transition-colors"
+            className="md:hidden p-2 hover:bg-black/10 rounded-lg cursor-pointer transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? (
-              <X className="w-6 h-6 text-black" />
+              <X className="w-6 h-6 text-black cursor-pointer" />
             ) : (
-              <Menu className="w-6 h-6 text-black" />
+              <Menu className="w-6 h-6 text-black cursor-pointer" />
             )}
           </button>
         </div>
@@ -132,7 +134,7 @@ export default function Navbar() {
             </div>
 
             {/* Mobile Icon Buttons */}
-            <div className="flex items-center gap-4 pt-4 border-t border-black/20">
+            <div className="z-20 flex items-center gap-4 pt-4 border-t border-black/20">
               <button
                 className="p-2 hover:bg-black/10 rounded-full transition-colors"
                 aria-label="Help"
@@ -146,10 +148,11 @@ export default function Navbar() {
                 <Bell className="w-6 h-6 text-black" />
               </button>
               <button
-                className="p-2 hover:bg-black/10 rounded-full transition-colors"
+                className="flex items-center gap-2 p-2 px-4 bg-main hover:bg-main-hover rounded-full cursor-pointer transition-colors"
                 aria-label="User Account"
               >
-                <User className="w-6 h-6 text-black" />
+                <User className="w-6 h-6 text-black cursor-pointer border border-black rounded-full" />
+                <span>Register/Login</span>
               </button>
             </div>
           </div>
