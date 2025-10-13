@@ -583,7 +583,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\Admin\\Documents\\projects\\letvana_mvp\\backend_feature\\generated\\prisma",
+      "value": "/home/syntax001/Documents/projects/letvana_mvp/Backend_Feature/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -592,17 +592,16 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "windows",
+        "value": "debian-openssl-3.0.x",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\Admin\\Documents\\projects\\letvana_mvp\\backend_feature\\prisma\\schema.prisma",
+    "sourceFilePath": "/home/syntax001/Documents/projects/letvana_mvp/Backend_Feature/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
-    "schemaEnvPath": "../../.env"
+    "rootEnvPath": null
   },
   "relativePath": "../../prisma",
   "clientVersion": "6.16.2",
