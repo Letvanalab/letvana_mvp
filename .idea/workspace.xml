@@ -5,8 +5,128 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a04e145e-f61b-4bfc-8ce8-71adb667a839" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/app.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/auth/config/authConfig.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/auth/controllers/adminAuth.controller.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/auth/controllers/authO.controller.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/auth/controllers/passwordReset.controller.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/auth/controllers/userAuth.controller.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/auth/middlewares/auth.middleware.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/auth/middlewares/authO.middleware.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/auth/middlewares/validator.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/auth/routes/adminAuth.Routes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/auth/routes/authO.Routes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/auth/routes/userAuth.Routes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/auth/services/adminAuthService.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/auth/services/authOService.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/auth/services/passwordReset.Service.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/auth/services/tokenService.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/auth/services/userAuthService.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/config/cache.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/dashboard/controller/landlordDashboard.controller.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/dashboard/routes/dashboard.routes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/dashboard/service/landlordDashboard.service.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/database/letvana_rental_schema.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/database/prisma.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/generated/prisma/client.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/generated/prisma/client.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/generated/prisma/default.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/generated/prisma/default.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/generated/prisma/edge.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/generated/prisma/edge.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/generated/prisma/index-browser.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/generated/prisma/index.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/generated/prisma/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/generated/prisma/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/generated/prisma/query_engine-windows.dll.node" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/generated/prisma/query_engine_bg.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/generated/prisma/query_engine_bg.wasm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/generated/prisma/runtime/edge-esm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/generated/prisma/runtime/edge.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/generated/prisma/runtime/index-browser.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/generated/prisma/runtime/index-browser.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/generated/prisma/runtime/library.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/generated/prisma/runtime/library.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/generated/prisma/runtime/react-native.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/generated/prisma/runtime/wasm-compiler-edge.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/generated/prisma/runtime/wasm-engine-edge.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/generated/prisma/schema.prisma" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/generated/prisma/wasm-edge-light-loader.mjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/generated/prisma/wasm-worker-loader.mjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/generated/prisma/wasm.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/generated/prisma/wasm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/jest.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/routes/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/server.test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/tests/auth.spec.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/tests/dashboard.spec.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/tests/profile.spec.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/tests/setup.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/user/controller/userProfile.controller.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/user/routes/userProfile.routes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_Feature/user/service/userProfile.service.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend_Feature/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/DESIGN_SYSTEM_SUMMARY.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/FIGMA_COLOR_EXTRACTION.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/bun.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/eslint.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/hOME.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/auth-picture.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/landing-page.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/vite.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/react.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/tenant.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/BenefitsSection.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/ColorPalette.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/FAQSection.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/FeaturedProperties.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/Footer.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/Header.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/HeroSection.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/PropertyTypeSection.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/StoreDemo.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/forms/decision-form.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/forms/login-form.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/forms/register-form.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/layouts/AppLayout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/layouts/AuthLayout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/layouts/GuestLayout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/ui/button.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/ui/checkbox.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/ui/input.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/ui/label.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/lib/Icons.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/lib/color-utils.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/lib/design-tokens.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/lib/schema.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/lib/utils.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/main.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/pages/Home.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/pages/Landing.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/pages/PropertyDetails.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/pages/auth/ForgotPassword.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/pages/auth/Login.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/pages/auth/Register.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/pages/auth/ResetPassword.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/routes.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/store/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/store/StoreProvider.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/store/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/store/slices/authSlice.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/store/slices/uiSlice.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/store/slices/userSlice.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/vite-env.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/tailwind.config.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/tsconfig.app.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/tsconfig.node.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/vite.config.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/auth/register/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/auth/register/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,25 +150,25 @@
     <option name="openDirectoriesWithSingleClick" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;frontend-david&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/syntax001/Documents/projects/letvana_mvp/frontend/public/assets&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.prettier&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/syntax001/Documents/projects/letvana_mvp/frontend/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "Merging frontend-david",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "/home/syntax001/Documents/projects/letvana_mvp/frontend/public/assets",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "settings.javascript.prettier",
+    "to.speed.mode.migration.done": "true",
+    "ts.external.directory.path": "/home/syntax001/Documents/projects/letvana_mvp/frontend/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/frontend/public/assets" />
@@ -78,7 +198,7 @@
       <workItem from="1760283950401" duration="7472000" />
       <workItem from="1760347629723" duration="7332000" />
       <workItem from="1760360754139" duration="3521000" />
-      <workItem from="1760371859805" duration="1915000" />
+      <workItem from="1760371859805" duration="2669000" />
     </task>
     <servers />
   </component>
