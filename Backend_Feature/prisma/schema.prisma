@@ -1,0 +1,586 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model activity_logs {
+  log_id      BigInt       @id @default(autoincrement())
+  user_id     BigInt?
+  admin_id    BigInt?
+  action      String       @db.VarChar(100)
+  entity_type String?      @db.VarChar(50)
+  entity_id   BigInt?
+  old_values  Json?
+  new_values  Json?
+  ip_address  String?      @db.Inet
+  user_agent  String?
+  created_at  DateTime?    @default(now()) @db.Timestamp(6)
+  admin_users admin_users? @relation(fields: [admin_id], references: [admin_id], onUpdate: NoAction)
+  users       users?       @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+
+  @@index([action], map: "idx_activity_logs_action")
+  @@index([admin_id], map: "idx_activity_logs_admin_id")
+  @@index([created_at], map: "idx_activity_logs_created_at")
+  @@index([entity_type, entity_id], map: "idx_activity_logs_entity")
+  @@index([user_id], map: "idx_activity_logs_user_id")
+}
+
+model admin_users {
+  admin_id      BigInt          @id @default(autoincrement())
+  email         String          @unique @db.VarChar(255)
+  password_hash String          @db.VarChar(255)
+  first_name    String          @db.VarChar(100)
+  last_name     String          @db.VarChar(100)
+  role          admin_role_enum
+  permissions   Json?
+  is_active     Boolean?        @default(true)
+  last_login_at DateTime?       @db.Timestamp(6)
+  created_at    DateTime?       @default(now()) @db.Timestamp(6)
+  updated_at    DateTime?       @default(now()) @db.Timestamp(6)
+  activity_logs activity_logs[]
+
+  @@index([is_active], map: "idx_admin_users_active")
+  @@index([email], map: "idx_admin_users_email")
+  @@index([role], map: "idx_admin_users_role")
+}
+
+model conversations {
+  conversation_id                        BigInt                    @id @default(autoincrement())
+  property_id                            BigInt
+  tenant_id                              BigInt
+  landlord_id                            BigInt
+  status                                 conversation_status_enum? @default(active)
+  created_at                             DateTime?                 @default(now()) @db.Timestamp(6)
+  updated_at                             DateTime?                 @default(now()) @db.Timestamp(6)
+  users_conversations_landlord_idTousers users                     @relation("conversations_landlord_idTousers", fields: [landlord_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
+  properties                             properties                @relation(fields: [property_id], references: [property_id], onDelete: Cascade, onUpdate: NoAction)
+  users_conversations_tenant_idTousers   users                     @relation("conversations_tenant_idTousers", fields: [tenant_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
+  messages                               messages[]
+
+  @@unique([property_id, tenant_id, landlord_id])
+  @@index([landlord_id], map: "idx_conversations_landlord_id")
+  @@index([property_id], map: "idx_conversations_property_id")
+  @@index([status], map: "idx_conversations_status")
+  @@index([tenant_id], map: "idx_conversations_tenant_id")
+}
+
+model messages {
+  message_id      BigInt             @id @default(autoincrement())
+  conversation_id BigInt
+  sender_id       BigInt
+  message_type    message_type_enum? @default(text)
+  subject         String?            @db.VarChar(255)
+  message_text    String
+  is_read         Boolean?           @default(false)
+  read_at         DateTime?          @db.Timestamp(6)
+  created_at      DateTime?          @default(now()) @db.Timestamp(6)
+  conversations   conversations      @relation(fields: [conversation_id], references: [conversation_id], onDelete: Cascade, onUpdate: NoAction)
+  users           users              @relation(fields: [sender_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([conversation_id], map: "idx_messages_conversation_id")
+  @@index([conversation_id, is_read, created_at], map: "idx_messages_conversation_read")
+  @@index([created_at], map: "idx_messages_created_at")
+  @@index([is_read], map: "idx_messages_is_read")
+  @@index([sender_id], map: "idx_messages_sender_id")
+}
+
+model notification_templates {
+  template_id       Int                    @id @default(autoincrement())
+  template_name     String                 @unique @db.VarChar(100)
+  notification_type notification_type_enum
+  subject           String?                @db.VarChar(255)
+  body              String
+  variables         Json?
+  is_active         Boolean?               @default(true)
+  created_at        DateTime?              @default(now()) @db.Timestamp(6)
+  updated_at        DateTime?              @default(now()) @db.Timestamp(6)
+  notifications     notifications[]
+}
+
+model notifications {
+  notification_id        BigInt                    @id @default(autoincrement())
+  user_id                BigInt
+  template_id            Int?
+  notification_type      notification_type_enum
+  subject                String?                   @db.VarChar(255)
+  body                   String
+  status                 notification_status_enum? @default(pending)
+  sent_at                DateTime?                 @db.Timestamp(6)
+  read_at                DateTime?                 @db.Timestamp(6)
+  error_message          String?
+  retry_count            Int?                      @default(0)
+  max_retries            Int?                      @default(3)
+  scheduled_at           DateTime?                 @db.Timestamp(6)
+  metadata               Json?
+  created_at             DateTime?                 @default(now()) @db.Timestamp(6)
+  updated_at             DateTime?                 @default(now()) @db.Timestamp(6)
+  notification_templates notification_templates?   @relation(fields: [template_id], references: [template_id], onUpdate: NoAction)
+  users                  users                     @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([created_at], map: "idx_notifications_created_at")
+  @@index([notification_type], map: "idx_notifications_notification_type")
+  @@index([scheduled_at], map: "idx_notifications_scheduled_at")
+  @@index([status], map: "idx_notifications_status")
+  @@index([user_id], map: "idx_notifications_user_id")
+  @@index([user_id, status, notification_type], map: "idx_notifications_user_status")
+}
+
+model password_reset_tokens {
+  token_id   BigInt    @id @default(autoincrement())
+  user_id    BigInt
+  token      String    @unique @db.VarChar(255)
+  expires_at DateTime  @db.Timestamp(6)
+  used_at    DateTime? @db.Timestamp(6)
+  created_at DateTime? @default(now()) @db.Timestamp(6)
+  users      users     @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([expires_at], map: "idx_password_reset_expires")
+  @@index([token], map: "idx_password_reset_token")
+}
+
+model payment_methods {
+  payment_method_id BigInt            @id @default(autoincrement())
+  user_id           BigInt
+  payment_type      payment_type_enum
+  payment_provider  String?           @db.VarChar(100)
+  account_details   Json?
+  is_default        Boolean?          @default(false)
+  is_active         Boolean?          @default(true)
+  created_at        DateTime?         @default(now()) @db.Timestamp(6)
+  updated_at        DateTime?         @default(now()) @db.Timestamp(6)
+  users             users             @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
+  rent_payments     rent_payments[]
+
+  @@index([is_active], map: "idx_payment_methods_active")
+  @@index([payment_type], map: "idx_payment_methods_payment_type")
+  @@index([user_id], map: "idx_payment_methods_user_id")
+}
+
+model properties {
+  property_id                         BigInt                    @id @default(autoincrement())
+  owner_id                            BigInt
+  title                               String                    @db.VarChar(255)
+  description                         String?
+  property_type                       property_type_enum
+  bedrooms                            Int?                      @db.SmallInt
+  bathrooms                           Int?                      @db.SmallInt
+  toilets                             Int?                      @db.SmallInt
+  price                               Decimal                   @db.Decimal(12, 2)
+  currency                            String?                   @default("NGN") @db.VarChar(3)
+  status                              property_status_enum?     @default(draft)
+  state                               String                    @db.VarChar(100)
+  city                                String                    @db.VarChar(100)
+  neighborhood                        String?                   @db.VarChar(100)
+  address                             String
+  latitude                            Decimal?                  @db.Decimal(10, 8)
+  longitude                           Decimal?                  @db.Decimal(11, 8)
+  amenities                           Json?
+  furnished                           Boolean?                  @default(false)
+  serviced                            Boolean?                  @default(false)
+  parking_spaces                      Int?                      @default(0) @db.SmallInt
+  is_verified                         Boolean?                  @default(false)
+  verified_by                         BigInt?
+  verified_at                         DateTime?                 @db.Timestamp(6)
+  verification_notes                  String?
+  online_viewing_enabled              Boolean?                  @default(false)
+  online_viewing_type                 online_viewing_type_enum? @default(video_tour)
+  video_tour_url                      String?                   @db.VarChar(500)
+  inspection_available                Boolean?                  @default(true)
+  inspection_notes                    String?
+  inspection_contact                  String?                   @db.VarChar(255)
+  created_at                          DateTime?                 @default(now()) @db.Timestamp(6)
+  updated_at                          DateTime?                 @default(now()) @db.Timestamp(6)
+  deleted_at                          DateTime?                 @db.Timestamp(6)
+  conversations                       conversations[]
+  users_properties_owner_idTousers    users                     @relation("properties_owner_idTousers", fields: [owner_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
+  users_properties_verified_byTousers users?                    @relation("properties_verified_byTousers", fields: [verified_by], references: [user_id], onUpdate: NoAction)
+  property_media                      property_media[]
+  rental_agreements                   rental_agreements[]
+  screening_requests                  screening_requests[]
+  user_favorites                      user_favorites[]
+
+  @@index([bedrooms], map: "idx_properties_bedrooms")
+  @@index([created_at], map: "idx_properties_created_at")
+  @@index([state, city], map: "idx_properties_location")
+  @@index([latitude, longitude], map: "idx_properties_location_coords")
+  @@index([owner_id], map: "idx_properties_owner_id")
+  @@index([price], map: "idx_properties_price")
+  @@index([property_type], map: "idx_properties_property_type")
+  @@index([property_type, state, city, bedrooms, price, status], map: "idx_properties_search")
+  @@index([status], map: "idx_properties_status")
+  @@index([is_verified], map: "idx_properties_verified")
+}
+
+model property_media {
+  media_id      BigInt          @id @default(autoincrement())
+  property_id   BigInt
+  media_type    media_type_enum
+  media_url     String          @db.VarChar(500)
+  media_title   String?         @db.VarChar(255)
+  display_order Int?            @default(0) @db.SmallInt
+  is_primary    Boolean?        @default(false)
+  created_at    DateTime?       @default(now()) @db.Timestamp(6)
+  properties    properties      @relation(fields: [property_id], references: [property_id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([display_order], map: "idx_property_media_display_order")
+  @@index([property_id], map: "idx_property_media_property_id")
+  @@index([media_type], map: "idx_property_media_type")
+}
+
+model rent_payments {
+  payment_id             BigInt                  @id @default(autoincrement())
+  agreement_id           BigInt
+  payment_method_id      BigInt?
+  amount                 Decimal                 @db.Decimal(12, 2)
+  payment_type           rent_payment_type_enum? @default(rent)
+  due_date               DateTime                @db.Date
+  payment_status         payment_status_enum?    @default(pending)
+  payment_date           DateTime?               @db.Timestamp(6)
+  gateway_transaction_id String?                 @db.VarChar(255)
+  gateway_response       Json?
+  receipt_url            String?                 @db.VarChar(500)
+  notes                  String?
+  created_at             DateTime?               @default(now()) @db.Timestamp(6)
+  updated_at             DateTime?               @default(now()) @db.Timestamp(6)
+  rental_agreements      rental_agreements       @relation(fields: [agreement_id], references: [agreement_id], onDelete: Cascade, onUpdate: NoAction)
+  payment_methods        payment_methods?        @relation(fields: [payment_method_id], references: [payment_method_id], onUpdate: NoAction)
+
+  @@index([agreement_id], map: "idx_rent_payments_agreement_id")
+  @@index([due_date], map: "idx_rent_payments_due_date")
+  @@index([gateway_transaction_id], map: "idx_rent_payments_gateway_transaction_id")
+  @@index([payment_date], map: "idx_rent_payments_payment_date")
+  @@index([payment_status], map: "idx_rent_payments_payment_status")
+  @@index([agreement_id, payment_status, due_date], map: "idx_rent_payments_tenant_status")
+}
+
+model rental_agreements {
+  agreement_id                               BigInt                 @id @default(autoincrement())
+  property_id                                BigInt
+  tenant_id                                  BigInt
+  landlord_id                                BigInt
+  monthly_rent                               Decimal                @db.Decimal(12, 2)
+  security_deposit                           Decimal?               @db.Decimal(12, 2)
+  agreement_start_date                       DateTime               @db.Date
+  agreement_end_date                         DateTime               @db.Date
+  payment_due_day                            Int?                   @default(1) @db.SmallInt
+  status                                     agreement_status_enum? @default(pending)
+  agreement_document_url                     String?                @db.VarChar(500)
+  terms_and_conditions                       String?
+  created_at                                 DateTime?              @default(now()) @db.Timestamp(6)
+  updated_at                                 DateTime?              @default(now()) @db.Timestamp(6)
+  rent_payments                              rent_payments[]
+  users_rental_agreements_landlord_idTousers users                  @relation("rental_agreements_landlord_idTousers", fields: [landlord_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
+  properties                                 properties             @relation(fields: [property_id], references: [property_id], onDelete: Cascade, onUpdate: NoAction)
+  users_rental_agreements_tenant_idTousers   users                  @relation("rental_agreements_tenant_idTousers", fields: [tenant_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([agreement_start_date, agreement_end_date], map: "idx_rental_agreements_dates")
+  @@index([landlord_id], map: "idx_rental_agreements_landlord_id")
+  @@index([property_id], map: "idx_rental_agreements_property_id")
+  @@index([status], map: "idx_rental_agreements_status")
+  @@index([tenant_id], map: "idx_rental_agreements_tenant_id")
+}
+
+model screening_documents {
+  document_id          BigInt                        @id @default(autoincrement())
+  request_id           BigInt
+  document_type        document_type_enum
+  document_name        String                        @db.VarChar(255)
+  document_url         String                        @db.VarChar(500)
+  verification_status  verification_doc_status_enum? @default(pending)
+  verification_details Json?
+  uploaded_at          DateTime?                     @default(now()) @db.Timestamp(6)
+  screening_requests   screening_requests            @relation(fields: [request_id], references: [request_id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([document_type], map: "idx_screening_documents_document_type")
+  @@index([request_id], map: "idx_screening_documents_request_id")
+  @@index([verification_status], map: "idx_screening_documents_verification_status")
+}
+
+model screening_requests {
+  request_id                                  BigInt                 @id @default(autoincrement())
+  property_id                                 BigInt
+  tenant_id                                   BigInt
+  landlord_id                                 BigInt
+  request_status                              screening_status_enum? @default(pending)
+  requested_documents                         Json?
+  screening_notes                             String?
+  decision_notes                              String?
+  expires_at                                  DateTime?              @db.Timestamp(6)
+  created_at                                  DateTime?              @default(now()) @db.Timestamp(6)
+  updated_at                                  DateTime?              @default(now()) @db.Timestamp(6)
+  screening_documents                         screening_documents[]
+  users_screening_requests_landlord_idTousers users                  @relation("screening_requests_landlord_idTousers", fields: [landlord_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
+  properties                                  properties             @relation(fields: [property_id], references: [property_id], onDelete: Cascade, onUpdate: NoAction)
+  users_screening_requests_tenant_idTousers   users                  @relation("screening_requests_tenant_idTousers", fields: [tenant_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([expires_at], map: "idx_screening_requests_expires_at")
+  @@index([landlord_id], map: "idx_screening_requests_landlord_id")
+  @@index([property_id], map: "idx_screening_requests_property_id")
+  @@index([request_status], map: "idx_screening_requests_status")
+  @@index([tenant_id], map: "idx_screening_requests_tenant_id")
+}
+
+model search_alerts {
+  alert_id               BigInt                       @id @default(autoincrement())
+  user_id                BigInt
+  alert_name             String                       @db.VarChar(255)
+  search_criteria        Json
+  notification_frequency notification_frequency_enum? @default(daily)
+  notification_method    notification_method_enum?    @default(both)
+  is_active              Boolean?                     @default(true)
+  last_sent_at           DateTime?                    @db.Timestamp(6)
+  created_at             DateTime?                    @default(now()) @db.Timestamp(6)
+  updated_at             DateTime?                    @default(now()) @db.Timestamp(6)
+  users                  users                        @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([is_active], map: "idx_search_alerts_active")
+  @@index([notification_frequency], map: "idx_search_alerts_frequency")
+  @@index([user_id], map: "idx_search_alerts_user_id")
+}
+
+model system_settings {
+  setting_key   String             @id @db.VarChar(100)
+  setting_value String?
+  setting_type  setting_type_enum? @default(string)
+  description   String?
+  is_public     Boolean?           @default(false)
+  created_at    DateTime?          @default(now()) @db.Timestamp(6)
+  updated_at    DateTime?          @default(now()) @db.Timestamp(6)
+}
+
+model user_favorites {
+  user_id     BigInt
+  property_id BigInt
+  created_at  DateTime?  @default(now()) @db.Timestamp(6)
+  properties  properties @relation(fields: [property_id], references: [property_id], onDelete: Cascade, onUpdate: NoAction)
+  users       users      @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([user_id, property_id])
+  @@index([created_at], map: "idx_user_favorites_created_at")
+  @@index([user_id], map: "idx_user_favorites_user_id")
+}
+
+model user_notification_preferences {
+  user_id           BigInt
+  notification_type notification_type_enum
+  category          notification_category_enum
+  is_enabled        Boolean?                   @default(true)
+  updated_at        DateTime?                  @default(now()) @db.Timestamp(6)
+  users             users                      @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([user_id, notification_type, category])
+}
+
+model user_sessions {
+  session_id String    @id @db.VarChar(255)
+  user_id    BigInt
+  ip_address String?   @db.Inet
+  user_agent String?
+  expires_at DateTime  @db.Timestamp(6)
+  created_at DateTime? @default(now()) @db.Timestamp(6)
+  users      users     @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([expires_at], map: "idx_sessions_expires_at")
+  @@index([user_id], map: "idx_sessions_user_id")
+}
+
+model users {
+  user_id                                                  BigInt                          @id @default(autoincrement())
+  email                                                    String                          @unique @db.VarChar(255)
+  phone_number                                             String                          @unique @db.VarChar(20)
+  password_hash                                            String                          @db.VarChar(255)
+  first_name                                               String                          @db.VarChar(100)
+  last_name                                                String                          @db.VarChar(100)
+  user_type                                                user_type_enum
+  profile_picture_url                                      String?                         @db.VarChar(500)
+  is_active                                                Boolean?                        @default(true)
+  is_verified                                              Boolean?                        @default(false)
+  email_verified_at                                        DateTime?                       @db.Timestamp(6)
+  phone_verified_at                                        DateTime?                       @db.Timestamp(6)
+  verification_status                                      verification_status_enum?       @default(pending)
+  verification_documents                                   Json?
+  last_login_at                                            DateTime?                       @db.Timestamp(6)
+  created_at                                               DateTime?                       @default(now()) @db.Timestamp(6)
+  updated_at                                               DateTime?                       @default(now()) @db.Timestamp(6)
+  deleted_at                                               DateTime?                       @db.Timestamp(6)
+  activity_logs                                            activity_logs[]
+  conversations_conversations_landlord_idTousers           conversations[]                 @relation("conversations_landlord_idTousers")
+  conversations_conversations_tenant_idTousers             conversations[]                 @relation("conversations_tenant_idTousers")
+  messages                                                 messages[]
+  notifications                                            notifications[]
+  password_reset_tokens                                    password_reset_tokens[]
+  payment_methods                                          payment_methods[]
+  properties_properties_owner_idTousers                    properties[]                    @relation("properties_owner_idTousers")
+  properties_properties_verified_byTousers                 properties[]                    @relation("properties_verified_byTousers")
+  rental_agreements_rental_agreements_landlord_idTousers   rental_agreements[]             @relation("rental_agreements_landlord_idTousers")
+  rental_agreements_rental_agreements_tenant_idTousers     rental_agreements[]             @relation("rental_agreements_tenant_idTousers")
+  screening_requests_screening_requests_landlord_idTousers screening_requests[]            @relation("screening_requests_landlord_idTousers")
+  screening_requests_screening_requests_tenant_idTousers   screening_requests[]            @relation("screening_requests_tenant_idTousers")
+  search_alerts                                            search_alerts[]
+  user_favorites                                           user_favorites[]
+  user_notification_preferences                            user_notification_preferences[]
+  user_sessions                                            user_sessions[]
+
+  @@index([is_active], map: "idx_users_active")
+  @@index([email], map: "idx_users_email")
+  @@index([phone_number], map: "idx_users_phone")
+  @@index([user_type], map: "idx_users_user_type")
+  @@index([verification_status], map: "idx_users_verification_status")
+}
+
+enum admin_role_enum {
+  super_admin
+  property_verifier
+  customer_support
+  content_moderator
+}
+
+enum agreement_status_enum {
+  active
+  expired
+  terminated
+  pending
+}
+
+enum conversation_status_enum {
+  active
+  closed
+  archived
+}
+
+enum document_type_enum {
+  id_card
+  drivers_license
+  passport
+  employment_letter
+  bank_statement
+  other
+}
+
+enum media_type_enum {
+  photo
+  video
+}
+
+enum message_type_enum {
+  text
+  inquiry
+  scheduling
+  system
+}
+
+enum notification_category_enum {
+  messages
+  payments
+  alerts
+  reminders
+  system
+}
+
+enum notification_frequency_enum {
+  immediate
+  daily
+  weekly
+}
+
+enum notification_method_enum {
+  email
+  in_app
+  both
+}
+
+enum notification_status_enum {
+  pending
+  sent
+  failed
+  cancelled
+}
+
+enum notification_type_enum {
+  email
+  in_app
+  sms
+  push
+}
+
+enum online_viewing_type_enum {
+  video_tour
+  live_call
+}
+
+enum payment_status_enum {
+  pending
+  processing
+  completed
+  failed
+  refunded
+}
+
+enum payment_type_enum {
+  card
+  bank_transfer
+  mobile_wallet
+  ussd
+}
+
+enum property_status_enum {
+  available
+  rented
+  sold
+  draft
+  under_review
+}
+
+enum property_type_enum {
+  apartment
+  house
+  land
+  office_space
+  shop
+  warehouse
+}
+
+enum rent_payment_type_enum {
+  rent
+  security_deposit
+  late_fee
+  other
+}
+
+enum screening_status_enum {
+  pending
+  submitted
+  approved
+  rejected
+  expired
+}
+
+enum setting_type_enum {
+  string
+  number
+  boolean
+  json
+}
+
+enum user_type_enum {
+  tenant
+  landlord
+  agent
+}
+
+enum verification_doc_status_enum {
+  pending
+  verified
+  failed
+  manual_review
+}
+
+enum verification_status_enum {
+  pending
+  verified
+  rejected
+}
