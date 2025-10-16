@@ -10,7 +10,7 @@ const {
   updateStatusSchema,
   idParamSchema,
 } = require("../middlewares/listings.validation");
-const { upload } = require("../../src/utils/upload");
+const { upload } = require("../../utils/upload");
 
 // Single or multiple file uploads depending on your use case
 router.post("/create", upload.array("images", 5), controller.createListing);

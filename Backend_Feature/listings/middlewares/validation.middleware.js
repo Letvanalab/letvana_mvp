@@ -1,4 +1,4 @@
-const ApiResponse = require('../../src/utils/responses');
+const ApiResponse = require('../../utils/responses');
 
 const validate = (schema, property = 'body') => {
   return (req, res, next) => {

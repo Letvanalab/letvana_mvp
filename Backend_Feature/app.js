@@ -8,7 +8,7 @@ const router = express.Router()
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const ApiResponse = require('./src/utils/responses');
+const ApiResponse = require('./utils/responses');
 
 
 // temp
