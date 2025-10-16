@@ -1,7 +1,7 @@
-const cloudinary = require('../../config/cloudinary');
-const prisma = require('../../config/prismaClient');
+const cloudinary = require('../config/cloudinary');
+const prisma = require('../config/prismaClient');
 const fs = require('fs');
-const AppError = require('../../utils/AppError');
+const AppError = require('../../src/utils/AppError');
 
 class ListingsService {
   /**

@@ -4,8 +4,8 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const ApiResponse = require('./src/utils/responses');
-const listingsRoutes = require('./src/modules/listings/listings.routes');
-const { errorHandler } = require('./src/middlewares/errorHandler.middleware');
+const listingsRoutes = require('./listings/routes/listings.routes');
+const { errorHandler } = require('./listings/middlewares/errorHandler.middleware');
 
 
 const app = express();

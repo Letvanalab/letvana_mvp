@@ -2,21 +2,21 @@ const express = require('express');
 const router = express.Router();
 const listingsController = require('./listings.controller');
 const controller = new ListingsController();
-const validate = require('../../middlewares/validation.middleware');
+const validate = require('../middlewares/validation.middleware');
 const {
   createListingSchema,
   updateListingSchema,
   getListingsSchema,
   updateStatusSchema,
   idParamSchema,
-} = require('./listings.validation');
-const {upload} = require('../../utils/upload');
+} = require('../middlewares/listings.validation');
+const {upload} = require('../../src/utils/upload');
 
 // Single or multiple file uploads depending on your use case
 router.post('/create', upload.array('images', 5), controller.createListing);
 router.get('/', controller.getAllListings);
 
-const { authenticate, authorize } = require('../../middlewares/auth.middleware');
+const { authenticate, authorize } = require('../middlewares/auth.middleware');
 const ListingsController = require('./listings.controller');
 
 // Public routes
