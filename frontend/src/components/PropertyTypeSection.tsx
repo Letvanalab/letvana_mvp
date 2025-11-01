@@ -13,7 +13,7 @@ import {
  import { 
   PiBuildingOffice as Office 
 } from "react-icons/pi";
-import { Icons } from '../lib/icons';
+import { Icons } from '@/src/lib/Icons';
 
 const icons = Icons();
 
